@@ -27,6 +27,8 @@ public class StudentView {
         CreateAndConfigure();
     }
 
+    //object constructor
+
     private void CreateAndConfigure(){
         StartView = new GridPane();
         StartView.setMinSize(300,200);

@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TextArea;
+import java.util.ArrayList;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -45,10 +46,11 @@ public class StudentController {
         return CourseNames;
     }
 
-    public void HandlePrintStudentGrades(String student, String course, double grade, double averageGrade, TextArea txtArea) {
+    //public void HandlePrintStudentGrades(String student, String course, double grade, double averageGrade, TextArea txtArea) {
+    //}
 
-
-
+    public ObservableList<String> getAVGgrade() {
+        ArrayList<String> avgGrade = model.Statement();
     }
 
 }

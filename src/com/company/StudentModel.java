@@ -65,6 +65,11 @@ public class StudentModel {
         return Names;
     }
 
+   // public void PrepStatement_Student() {
+    //    String sql = "SELECT AVG(GRADE) FROM Grade WHERE Grade='"+
+   // }
+
+
     public void StudentInfoQuerry() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Write the name of the student, you wish to get information on:");
@@ -86,16 +91,31 @@ public class StudentModel {
         }
     }
 
-    public void PreparedStatement() {
-        String sql = "SELECT Course.CourseID, AVG(Teacher.Grade) AS avgClassGrade " +
+    /*public ObservableList<Student> QueryStatement_Students(ObservableList<Student> students) throws SQLException {
+        System.out.println("Retrieving data on students from database");
+        String sql = "SELECT Course.CourseID, AVG(Grade.Grade) AS avgClassGrade " +
                 "FROM Course " +
-                "LEFT JOIN Teacher ON Course.CourseID = ? " +
+                "LEFT JOIN Grade ON Course.CourseID = ? " +
                 "GROUP BY Course.CourseID;";
                 try {
                     pstmt = conn.prepareStatement(sql);
                 } catch (SQLException e) {
                     System.out.println(e.getMessage());
                 }
+    }*/
+
+
+    public String Statement(String StudentID) throws SQLException {
+        String sql = "SELECT Course.CourseID, AVG(Grade.Grade) AS avgClassGrade " +
+                "FROM Course " +
+                "LEFT JOIN Grade ON Course.CourseID = ?; " +
+                "GROUP BY Course.CourseID;";
+        try {
+            pstmt = conn.prepareStatement(sql);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return sql;
     }
 
     public void FindGrade(String CourseID) {
