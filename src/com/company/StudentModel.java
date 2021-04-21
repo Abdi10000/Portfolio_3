@@ -31,7 +31,6 @@ public class StudentModel {
         this.stmt = conn.createStatement();
     }
 
-    // Important data. This data is retrieving the StudentID for the GUI
     public ArrayList<String> SQLQuerryStudentNames() {
         ArrayList<String> Names = new ArrayList<String>();
         String sql = "SELECT StudentID FROM Student;";
@@ -48,7 +47,6 @@ public class StudentModel {
         return Names;
     }
 
-    // Important data. This data is retrieving the CourseID for the GUI
     public ArrayList<String> SQLQuerryCourseNames() {
         ArrayList<String> Names = new ArrayList<String>();
         String sql = "SELECT CourseID FROM Course;";
@@ -65,7 +63,6 @@ public class StudentModel {
         return Names;
     }
 
-    // Important data. This data is retrieving the studentName, CourseName and grade
     public void PreparedStmtPrintStudentInfo() {
         String sql = "SELECT G1.SID, S1.StudentName, C1.CourseName, G1.CID, G1.Grade" +
                 "FROM Course AS C1 JOIN Grade AS G1 ON C1.CourseID = G1.CID" +
@@ -79,8 +76,6 @@ public class StudentModel {
     }
 
 
-
-    // Probably gonna be used
     class StudentData {
         String student;
         String course;
