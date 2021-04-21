@@ -35,6 +35,7 @@ public class Main extends Application {
  //   }
 
 
+        // All this code will probably gonna be deleted
         // All these code lines are statements
   /*  public static void main(String[] args) {
 

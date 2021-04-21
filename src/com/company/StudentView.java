@@ -13,12 +13,11 @@ public class StudentView {
     StudentController control;
     private GridPane StartView;
     Button exitButton = new Button("Exit");
-    Button FindStudentButton = new Button("Find Student");
-    Label StudentSelection = new Label("Select Student");
-    Label ClassSelection = new Label("Select Class");
-    Label GradeSelection = new Label("Select Grade");
+    Button FindStudentButton = new Button("Show Student Information");
+    Label StudentSelection = new Label("Select Student ID");
+    Label ClassSelection = new Label("Select Class ID");
 
-    TextArea averageGrade = new TextArea();
+    TextArea grade = new TextArea();
     ComboBox<String> StudentSelectionComBo = new ComboBox<String>();
     ComboBox<String> ClassSelectionComBo = new ComboBox<String>();
 
@@ -26,8 +25,6 @@ public class StudentView {
         this.control = control;
         CreateAndConfigure();
     }
-
-    //object constructor
 
     private void CreateAndConfigure(){
         StartView = new GridPane();
@@ -41,22 +38,17 @@ public class StudentView {
         StartView.add(StudentSelectionComBo, 15, 1);
         StartView.add(ClassSelection, 1, 3);
         StartView.add(ClassSelectionComBo, 15, 3);
-        StartView.add(GradeSelection, 1, 5);
         StartView.add(FindStudentButton, 15, 6);
-        StartView.add(averageGrade, 1, 7, 15, 7);
+        StartView.add(grade, 1, 7, 15, 7);
         StartView.add(exitButton, 20,15);
 
         // Shows list of students inside the GUI
         ObservableList<String> studentsList = control.getStudent();
         StudentSelectionComBo.setItems(studentsList);
-        // Shows the first student in the selected list
-        StudentSelectionComBo.getSelectionModel().selectFirst();
 
         // Shows list of courses inside the GUI
         ObservableList<String> classList = control.getCourse();
         ClassSelectionComBo.setItems(classList);
-        // Shows the first course in the selected list
-        ClassSelectionComBo.getSelectionModel().selectFirst();
     }
 
     public Parent asParent(){
