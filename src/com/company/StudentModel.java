@@ -2,8 +2,6 @@ package com.company;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Scanner;
-
 import static java.sql.DriverManager.getConnection;
 
 public class StudentModel {
@@ -63,11 +61,12 @@ public class StudentModel {
         return Names;
     }
 
+
     public void PreparedStmtPrintStudentInfo() {
-        String sql = "SELECT G1.SID, S1.StudentName, C1.CourseName, G1.CID, G1.Grade" +
-                "FROM Course AS C1 JOIN Grade AS G1 ON C1.CourseID = G1.CID" +
-                "LEFT JOIN Student AS S1 ON G1.SID = S1.StudentID" +
-                "WHERE G1.SID = ?;";
+        String sql = "SELECT G1.SID, S1.StudentName, C1.CourseName, G1.CID, G1.Grade " +
+                "FROM Course AS C1 JOIN Grade AS G1 ON C1.CourseID = G1.CID " +
+                "LEFT JOIN Student AS S1 ON G1.SID = S1.StudentID " +
+                "WHERE G1.SID = ? AND G1.CID = ?;";
         try {
             pstmt = conn.prepareStatement(sql);
         } catch (SQLException e) {
@@ -75,34 +74,42 @@ public class StudentModel {
         }
     }
 
+   class StudentData {
+       String SID;
+       String StudentName;
+       String CourseName;
+       String CID;
+       int Grade;
 
-    class StudentData {
-        String student;
-        String course;
+       public StudentData(String SID, String StudentName, String CourseName, String CID, int Grade) {
+           this.SID = SID;
+           this.StudentName = StudentName;
+           this.CourseName = CourseName;
+           this.CID = CID;
+           this.Grade = Grade;
+       }
+   }
 
-        public StudentData(String student, String course) {
-            this.student = student;
-            this.course = course;
-        }
-    }
-
-    public ArrayList<StudentData> FindStudentData(String student, String course) {
-        ArrayList<StudentData> studentdatas = new ArrayList<>();
-        try {
-            pstmt.setString(1, student);
-            pstmt.setString(2, course);
-            rs = pstmt.executeQuery();
-            if (rs == null) {
-                System.out.println("No data found, student does not exist");
-            }
-            while (rs != null && rs.next()) {
-                studentdatas.add(new StudentData(rs.getString(1), rs.getString(2)));
-                System.out.println("Student Name: " + rs.getString(1));
-                System.out.println("The students course: " + rs.getString(2));
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return studentdatas;
-    }
+       public ArrayList<StudentData> FindStudentData(String students, String courses) {
+           ArrayList<StudentData> studentdatas = new ArrayList<>();
+           try {
+               pstmt.setString(1, students);
+               pstmt.setString(2, courses);
+               rs = pstmt.executeQuery();
+               if (rs == null) {
+                   System.out.println("No data found, student does not exist");
+               }
+               while (rs != null && rs.next()) {
+                   studentdatas.add(new StudentData(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5)));
+                   System.out.println("Student ID: " + rs.getString(1));
+                   System.out.println("The student name: " + rs.getString(2));
+                   System.out.println("The Course name: " + rs.getString(3));
+                   System.out.println("The Course ID: " + rs.getString(4));
+                   System.out.println("The students grade: " + rs.getInt(5));
+               }
+           } catch (SQLException e) {
+               System.out.println(e.getMessage());
+           }
+           return studentdatas;
+   }
 }

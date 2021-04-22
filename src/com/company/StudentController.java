@@ -7,9 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextArea;
 import java.util.ArrayList;
-
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class StudentController {
 
@@ -18,7 +16,6 @@ public class StudentController {
 
     public StudentController(StudentModel model) {
         this.model = model;
-
         try {
             model.connect();
             model.CreateStatement();
@@ -35,10 +32,10 @@ public class StudentController {
         // Creates the exit button action
         view.exitButton.setOnAction(e -> Platform.exit());
 
-       // EventHandler<ActionEvent> printStudents = e -> HandlePrintStudentGrades(view.StudentSelectionComBo.getValue(), view.ClassSelectionComBo.getValue(), view.grade);
+        EventHandler<ActionEvent> printStudents = e -> HandlePrintStudentGrades(view.StudentSelectionComBo.getValue(), view.ClassSelectionComBo.getValue(), view.grade);
 
         // Creates an action button
-    //    view.FindStudentButton.setOnAction(printStudents);
+        view.FindStudentButton.setOnAction(printStudents);
 
     }
 
@@ -56,17 +53,17 @@ public class StudentController {
         return CourseNames;
     }
 
-
-
-  /*  // Look at it for later
+    // prints out the students information
     public void HandlePrintStudentGrades(String student, String course, TextArea txtArea) {
         txtArea.clear();
-        // Shows this text on the screen when pressing the button called "Find Student"
-        txtArea.appendText("Student Name: \nCourse Name: \nGrade: \n");
         model.PreparedStmtPrintStudentInfo();
-        ArrayList<StudentData> school = model.FindStudentData(student, course);
+        ArrayList<StudentModel.StudentData> school = model.FindStudentData(student, course);
         for (int i = 0; i < school.size(); i++) {
-            txtArea.appendText(i + " " + school.get(i).student + " " + school.get(i).course);
+            txtArea.appendText("Student ID: " + school.get(i).SID + "\n" +
+                                  "Student Name: " + school.get(i).StudentName + "\n" +
+                                  "Course Name: " + school.get(i).CourseName + "\n" +
+                                  "Course ID: " + school.get(i).CID + "\n" +
+                                  "Student Grade: " + school.get(i).Grade);
         }
-    } */
+    }
 }

@@ -1,14 +1,10 @@
 package com.company;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-//public class Main {
 
         @Override
         public void start(Stage primaryStage) throws Exception{
@@ -22,7 +18,7 @@ public class Main extends Application {
         // From the StudentController class
         StudentController control = new StudentController(studModel);
 
-        // From the StudenView class
+        // From the StudentView class
         StudentView view = new StudentView(control);
         control.setView(view);
         primaryStage.setTitle("Student And Grade Finder");
