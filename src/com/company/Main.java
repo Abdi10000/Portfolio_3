@@ -21,7 +21,7 @@ public class Main extends Application {
         // From the StudentView class
         StudentView view = new StudentView(control);
         control.setView(view);
-        primaryStage.setTitle("Student And Grade Finder");
+        primaryStage.setTitle("Student, Course And Grade Finder");
         primaryStage.setScene(new Scene(view.asParent(), 600, 475));
         primaryStage.show();
     }
